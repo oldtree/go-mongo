@@ -296,7 +296,10 @@ func compileStructSpec(t reflect.Type, depth map[string]int, index []int, ss *st
 				panic("use ,omitempty instead of /c in bson field tag")
 			}
 			p := strings.Split(tag, ",")
-			if len(p) > 0 && p[0] != "-" {
+			if len(p) > 0 {
+				if p[0] == "-" {
+					continue
+				}
 				if len(p[0]) > 0 {
 					fs.name = p[0]
 				}

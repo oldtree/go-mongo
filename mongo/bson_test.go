@@ -28,6 +28,11 @@ func testMap(value interface{}) map[string]interface{} {
 
 type stEmpty struct{}
 
+type stIgnore struct {
+	Test   string `bson:"test,omitempty"`
+	Ignore string `bson:"-"`
+}
+
 type stFloat32 struct {
 	Test float32 `bson:"test,omitempty"`
 }
@@ -197,6 +202,12 @@ var bsonTests = []struct {
 		empty,
 		empty,
 		"\x05\x00\x00\x00\x00",
+	},
+	{
+		stIgnore{Test: "world"},
+		testMap("world"),
+		testMap("world"),
+		"\x15\x00\x00\x00\x02test\x00\x06\x00\x00\x00world\x00\x00",
 	},
 	{
 		stFloat32{1.5},
