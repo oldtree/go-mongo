@@ -140,7 +140,7 @@ type Conn interface {
 //
 //  for cursor.HasNext() {
 //      var m map[string]interface{}
-//      err = r.Next(&m)
+//      err = cursor.Next(&m)
 //      if err != nil {
 //          return err
 //      }
